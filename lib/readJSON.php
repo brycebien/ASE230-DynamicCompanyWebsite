@@ -1,5 +1,5 @@
 <?php
-function readPlain($fileIn) {
+function readJSON($fileIn) {
     if (file_exists($fileIn)){
         return json_decode($fileIn);
     } else {
