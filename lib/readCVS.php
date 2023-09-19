@@ -5,6 +5,6 @@ function readCVS($fileIn) {
         return fgetcsv($fileIn);
         fclose($fileIn);
     } else {
-        "ERROR - CVS file ".$fileIn." not found...";
+       echo "ERROR - CVS file ".$fileIn." not found...";
     }
 }
