@@ -1,0 +1,22 @@
+[
+    {
+        "name":"GreenRoof™",
+        "description":"A modular green roofing system that utilizes smart sensors to regulate water, sunlight, and nutrients, allowing urban spaces to contribute positively to the environment.",
+        "applications":["Smart Irrigation: The system detects soil moisture levels and provides optimal water quantities, reducing wastage and ensuring plant health.","Pollinator Patches: Specific sections within the GreenRoof™ are designed to attract and support urban pollinators like bees and butterflies.","Air Purification Zones: Incorporates certain plants known to absorb pollutants, promoting cleaner urban air and combating the urban heat island effect."]
+    },
+    {
+        "name":"PureStream Filters™",
+        "description":"Bio-engineered filters that harness the power of specific bacteria and plants to purify water without chemicals, making potable water accessible and sustainable.",
+        "applications":["Microbial Cleansing: Harnesses beneficial bacteria to break down harmful pathogens, ensuring water purity without chemical residues.","Floating Gardens: Aesthetically pleasing modules that float on water surfaces, removing heavy metals and other toxins using specific wetland plants.","Portable Units: Compact, travel-friendly variants designed for trekkers and campers, ensuring access to clean water even in remote areas."]
+    },
+    {
+        "name":"TerraCharge™",
+        "description":"Pathways made with special tiles that convert foot traffic into usable energy, illuminating pathways at night or powering nearby amenities.",
+        "applications":["Energy Storage: Surplus energy from foot traffic during the day is stored in sleek, underground batteries, allowing extended use after dark.","Intelligent Lighting: The stored energy powers adaptive lighting systems that adjust based on ambient light and movement, ensuring pathways are well-lit without unnecessary energy consumption.","Interactive Displays: Some TerraCharge™ pathways feature interactive elements like ground-projected games or information graphics, all powered by pedestrian movement."]
+    },
+    {
+        "name":"EcoLearn Hub™",
+        "description":"A digital platform offering educational courses on sustainable living, organic farming, and eco-technology innovations.",
+        "applications":["DIY Workshops: Practical sessions teaching users how to upcycle waste, create home gardens, or even set up solar panels.","Children's Series: Tailored courses introducing children to nature conservation, renewable energy, and the importance of biodiversity.","Global Webinars: Regular online sessions featuring guest experts in fields like permaculture, green architecture, and sustainable transportation. These webinars foster a community of eco-enthusiasts and offer the latest in green innovations."]
+    }
+]
