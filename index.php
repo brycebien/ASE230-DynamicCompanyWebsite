@@ -51,7 +51,7 @@ require_once('./theme/functions.php');
                             <a href="#services" class="nav-link">Products & Services</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#features" class="nav-link">Features</a>
+                            <a href="#features" class="nav-link">Awards</a>
                         </li>
                         <li class="nav-item">
                             <a href="#pricing" class="nav-link">Pricing</a>
@@ -153,29 +153,32 @@ require_once('./theme/functions.php');
             <div class="container">
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-7 text-center">
-                        <h2 class="fw-bold">Our Features</h2>
-                        <p class="text-muted">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem ab illo inventore.</p>
+                        <h2 class="fw-bold">Awards</h2>
                     </div>
                     <!-- end col -->
                 </div>
                 <!-- end row -->
-                <div class="row align-items-center mb-5">
+                <?php
+                #loop through awards.csv and add them here
+                $fp=fopen('data/awards.csv','r');
+                while(!feof($fp)){
+                    $awards=fgets($fp);
+                    if(strlen($awards)<0) continue;
+                    $award=explode(';',$awards);
+                ?>
+                    <div class="row align-items-center mb-5">
                     <div class="col-md-5 order-2 order-md-1 mt-md-0 mt-5">
-                        <h2 class="mb-4">Perfect Solution For Small Businesses</h2>
-                        <p class="text-muted mb-5">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis..</p>
-                        <a href="javascript: void(0);" class="btn btn-primary">Find out more <i class="icon-xs ms-2" data-feather="arrow-right"></i></a>
-                    </div>
-                    <!-- end col -->
-                    <div class="col-md-6 ms-md-auto order-1 order-md-2">
-                        <div class="position-relative">
-                            <div class="ms-5 features-img">
-                                <img src="images/features-1.jpg" alt="" class="img-fluid d-block mx-auto rounded shadow" />
-                            </div>
-                            <img src="images/dot-img.png" alt="" class="dot-img-left" />
-                        </div>
+                        <h2 class="mb-4"><?=$award[0]?></h2>
+                        <p class="text-muted mb-5"><?=$award[1]?></p>
+                        
                     </div>
                     <!-- end col -->
                 </div> 
+                <?php
+                }
+                fclose($fp);
+                ?>
+                
                 <!-- end row -->
                 <div class="row align-items-center section pb-0">
                     <div class="col-md-6">
