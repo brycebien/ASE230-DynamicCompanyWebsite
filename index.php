@@ -48,7 +48,7 @@ require_once('./theme/functions.php');
                             <a href="#home" class="nav-link active">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#services" class="nav-link">Services</a>
+                            <a href="#services" class="nav-link">Products & Services</a>
                         </li>
                         <li class="nav-item">
                             <a href="#features" class="nav-link">Features</a>
