@@ -80,7 +80,8 @@ require_once('./theme/functions.php');
                     <div class="col-lg-8">
                         <div class="text-center">
                             <span class="badge badge-soft-primary mb-4">Professional Landing</span>
-                            <?=loadPage('overview','About Us')?>
+                            <?=loadPage('overview','About Us');
+                            loadPage('missionstatement','Mission Statement');?>
                             <!-- Modal -->
                             <div class="modal fade bd-example-modal-lg" id="watchvideomodal" data-keyboard="false" tabindex="-1"
                                 aria-hidden="true">
