@@ -114,7 +114,6 @@ require_once('./theme/functions.php');
                 <div class="row">
 
                     <?php
-                    #loop through the products.json file and print each block of code to create list of products
                     $products=file_get_contents('data/products.json');
                     $php_array=json_decode($products,true);
                     foreach($php_array as $product){?>
@@ -159,7 +158,6 @@ require_once('./theme/functions.php');
                 </div>
                 <!-- end row -->
                 <?php
-                #loop through awards.csv and add them here
                 $fp=fopen('data/awards.csv','r');
                 while(!feof($fp)){
                     $awards=fgets($fp);
