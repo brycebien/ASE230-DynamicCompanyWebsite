@@ -114,45 +114,31 @@ require_once('./theme/functions.php');
 
                     <?php
                     #loop through the products.json file and print each block of code to create list of products
-                    ?>
-                    <div class="col-lg-4">
+                    $products=file_get_contents('data/products.json');
+                    $php_array=json_decode($products,true);
+                    foreach($php_array as $product){?>
+                        <div class="col-lg-4">
                         <div class="service-box text-center px-4 py-5 position-relative mb-4">
                             <div class="service-box-content p-4">
                                 <div class="icon-mono service-icon avatar-md mx-auto mb-4">
                                     <i class="" data-feather="box"></i>
                                 </div>
-                                <h4 class="mb-3 font-size-22">Digital Design</h4>
-                                <p class="text-muted mb-0">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.</p>
+                                <h4 class="mb-3 font-size-22"><?=$product['name']?></h4>
+                                <p class="text-muted mb-0"><?=$product['description']?></p>
+                                <h4 class="mb-3 font-size-22">Applications:</h4>
+                                <?php for($i=0;$i<count($product['applications']);$i++){?>
+                                    <p class="text-muted mb-0"><?=
+                                        $product['applications'][$i];
+                                    ?>
+                                <?php
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
-                    <!-- end col -->
-
-                    <div class="col-lg-4">
-                        <div class="service-box text-center px-4 py-5 position-relative mb-4 active">
-                            <div class="service-box-content p-4">
-                                <div class="icon-mono service-icon avatar-md mx-auto mb-4">
-                                    <i class="" data-feather="layers"></i>
-                                </div>
-                                <h4 class="mb-3 font-size-22">Awesome Support</h4>
-                                <p class="text-muted mb-0">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end col -->
-
-                    <div class="col-lg-4">
-                        <div class="service-box text-center px-4 py-5 position-relative mb-4">
-                            <div class="service-box-content p-4">
-                                <div class="icon-mono service-icon avatar-md mx-auto mb-4">
-                                    <i class="" data-feather="server"></i>
-                                </div>
-                                <h4 class="mb-3 font-size-22">Easy to customize</h4>
-                                <p class="text-muted mb-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end col -->
+                    <?php
+                    }?>
+                    
                 </div>
                 <!-- end row -->
             </div>
