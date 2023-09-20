@@ -1,6 +1,7 @@
 <?php
 require_once('./theme/functions.php');
 require_once('./lib/readJSON.php');
+require_once('./lib/readCSV.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -158,11 +159,14 @@ require_once('./lib/readJSON.php');
                 <!-- end row -->
                 <?php
                 $fp=fopen('data/awards.csv','r');
+
+                
                 while(!feof($fp)){
-                    $awards=fgets($fp);
-                    if(strlen($awards)<0) continue;
-                    $award=explode(';',$awards);
-                ?>
+                    fgets($fp);
+                    //echo readCSV('data/awards.csv').'<br>';
+                    //echo 'print_r awards: '; print_r($awards);
+                    $award=explode(';',readCSV('data/awards.csv'));
+                    ?>
                     <div class="row align-items-center mb-5">
                     <div class="col-md-5 order-2 order-md-1 mt-md-0 mt-5">
                         <h2 class="mb-4"><?=$award[0]?></h2>

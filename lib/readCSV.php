@@ -1,9 +1,9 @@
 <?php
-function readCVS($fileIn) {
+function readCSV($fileIn) {
     if (file_exists($fileIn)){
-        fopen($fileIn,'r');
-        return fgetcsv($fileIn);
-        fclose($fileIn);
+        $fp=fopen($fileIn,'r');
+        return fgets($fp);
+        fclose($fp);
     } else {
        echo "ERROR - CSV file ".$fileIn." not found...";
     }
