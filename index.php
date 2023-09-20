@@ -158,26 +158,19 @@ require_once('./lib/readCSV.php');
                 </div>
                 <!-- end row -->
                 <?php
-                $fp=fopen('data/awards.csv','r');
-
-                
-                while(!feof($fp)){
-                    fgets($fp);
-                    //echo readCSV('data/awards.csv').'<br>';
-                    //echo 'print_r awards: '; print_r($awards);
-                    $award=explode(';',readCSV('data/awards.csv'));
+                $awards=readCSV('data/awards.csv');
+                for($i=0;$i<count($awards);$i++){
                     ?>
                     <div class="row align-items-center mb-5">
                     <div class="col-md-5 order-2 order-md-1 mt-md-0 mt-5">
-                        <h2 class="mb-4"><?=$award[0]?></h2>
-                        <p class="text-muted mb-5"><?=$award[1]?></p>
+                        <h2 class="mb-4"><?=$awards[$i]['year']?></h2>
+                        <p class="text-muted mb-5"><?=$awards[$i]['award']?></p>
                         
                     </div>
                     <!-- end col -->
                 </div> 
                 <?php
                 }
-                fclose($fp);
                 ?>
                 <!-- end row -->
             </div>
@@ -377,102 +370,42 @@ require_once('./lib/readCSV.php');
                 </div>
                 <!-- end row -->
                 <div class="row">
+                    <?php
+                    $employee=readCSV('data/team.csv');
+                    echo '<pre>';
+                    print_r($employee);
+                    echo '</pre>';
+                    for($i=0;$i<count($employee);$i++){
+                    ?>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="team-box mt-4 position-relative overflow-hidden rounded text-center shadow">
+                            <div class="position-relative overflow-hidden">
+                                <img src="images/team/<?=$i+1?>.jpg" alt="" class="img-fluid d-block mx-auto" />
+                                <ul class="list-inline p-3 mb-0 team-social-item">
+                                    <li class="list-inline-item mx-3">
+                                        <a href="javascript: void(0);" class="team-social-icon h-primary"><i class="icon-sm" data-feather="facebook"></i></a>
+                                    </li>
+                                    <li class="list-inline-item mx-3">
+                                        <a href="javascript: void(0);" class="team-social-icon h-info"><i class="icon-sm" data-feather="twitter"></i></a>
+                                    </li>
+                                    <li class="list-inline-item mx-3">
+                                        <a href="javascript: void(0);" class="team-social-icon h-danger"><i class="icon-sm" data-feather="instagram"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p-4">
+                                <h5 class="font-size-19 mb-1"><?=$employee[$i]['name']?></h5>
+                                <p class="text-muted text-uppercase font-size-14 mb-0"><?=$employee[$i]['title']?></p>
+                                <p class="text-muted text-uppercase font-size-14 mb-0"><?=$employee[$i]['description']?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                    <!-- end col -->
+
                     
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="team-box mt-4 position-relative overflow-hidden rounded text-center shadow">
-                            <div class="position-relative overflow-hidden">
-                                <img src="images/team/1.jpg" alt="" class="img-fluid d-block mx-auto" />
-                                <ul class="list-inline p-3 mb-0 team-social-item">
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-primary"><i class="icon-sm" data-feather="facebook"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-info"><i class="icon-sm" data-feather="twitter"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-danger"><i class="icon-sm" data-feather="instagram"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="p-4">
-                                <h5 class="font-size-19 mb-1"><?='name'?></h5>
-                                <p class="text-muted text-uppercase font-size-14 mb-0"><?='Title'?></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end col -->
-
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="team-box mt-4 position-relative overflow-hidden rounded text-center shadow">
-                            <div class="position-relative overflow-hidden">
-                                <img src="images/team/2.jpg" alt="" class="img-fluid d-block mx-auto" />
-                                <ul class="list-inline p-3 mb-0 team-social-item">
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-primary"><i class="icon-sm" data-feather="facebook"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-info"><i class="icon-sm" data-feather="twitter"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-danger"><i class="icon-sm" data-feather="instagram"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="p-4">
-                                <h5 class="font-size-19 mb-1">John Jones</h5>
-                                <p class="text-muted text-uppercase font-size-14 mb-0">Ceo</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end col -->
-
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="team-box mt-4 position-relative overflow-hidden rounded text-center shadow">
-                            <div class="position-relative overflow-hidden">
-                                <img src="images/team/3.jpg" alt="" class="img-fluid d-block mx-auto" />
-                                <ul class="list-inline p-3 mb-0 team-social-item">
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-primary"><i class="icon-sm" data-feather="facebook"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-info"><i class="icon-sm" data-feather="twitter"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-danger"><i class="icon-sm" data-feather="instagram"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="p-4">
-                                <h5 class="font-size-19 mb-1">Della Hobbs</h5>
-                                <p class="text-muted text-uppercase font-size-14 mb-0">Designer</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end col -->
-
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="team-box mt-4 position-relative overflow-hidden rounded text-center shadow">
-                            <div class="position-relative overflow-hidden">
-                                <img src="images/team/4.jpg" alt="" class="img-fluid d-block mx-auto" />
-                                <ul class="list-inline p-3 mb-0 team-social-item">
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-primary"><i class="icon-sm" data-feather="facebook"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-info"><i class="icon-sm" data-feather="twitter"></i></a>
-                                    </li>
-                                    <li class="list-inline-item mx-3">
-                                        <a href="javascript: void(0);" class="team-social-icon h-danger"><i class="icon-sm" data-feather="instagram"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="p-4">
-                                <h5 class="font-size-19 mb-1">Troy Jordon</h5>
-                                <p class="text-muted text-uppercase font-size-14 mb-0">Developer</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end col -->
                 </div>
                 <!-- end row -->
             </div>
