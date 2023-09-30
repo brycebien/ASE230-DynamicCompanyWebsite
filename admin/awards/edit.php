@@ -2,8 +2,6 @@
 require_once('./awards.php');
 $index=$_GET['index'];
 $awards=get_awards();
-
-edit_award($awards[$index]);
 ?>
 
 <head>
