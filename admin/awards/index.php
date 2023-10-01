@@ -20,12 +20,13 @@ $awards=get_awards();
         }else {
             for($i=0;$i<count($awards);$i++){ ?>
                 <tr>
-                    <td><b><?= $i + 1 ?>.</b></td>
-                    <td><p class="text-muted mb-5"><b><?=$awards[$i]['year']?></b> <?=$awards[$i]['award']?></p></td>
+                    <td><b><?= $awards[$i]['id'] ?>.</b></td>
+                    <td><p class="text-muted mb-5"><b><?=$awards[$i]['year']?></b>: <?=$awards[$i]['award']?></p></td>
                     <td style="width:80px"><a href="detail.php?index=<?=$i?>">View details</a></td>
                     <td><a href="edit.php?index=<?=$i?>">Edit</a></td>
                     <td><a href="delete.php?index=<?=$i?>">Delete</a></td>
                 </tr>
-        <?php }} ?>
+        <?php }
+        } ?>
     </table>
 </body>

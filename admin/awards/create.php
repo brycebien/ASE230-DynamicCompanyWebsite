@@ -1,7 +1,12 @@
 <?php
 require_once('./awards.php');
-$index=$_GET['index'];
 $awards=get_awards();
+$index=count($awards);
+
+if (isset($_POST['index'])){
+    echo create_award($_POST);
+    return;
+}
 ?>
 
 <head>
@@ -13,5 +18,14 @@ $awards=get_awards();
     <a href="index.php"><< Back</a>
     <hr>
 
-    <h1>Create new award</h1>
+    <h2>Create new award</h2>
+    <p>New award ID: <b><?= $index ?></b></p>
+    <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
+        <label for="year">Year:</label> <br>
+        <input type="text" name="year"> <br>
+        <label for="award">Description:</label> <br>
+        <textarea type="text" name="award" style="width:512px;height:128px"></textarea> <br><br>
+        <input type="hidden" name="index" value="<?= $index ?>">
+        <button type="submit">Create new entry</button>
+    </form>
 </body>

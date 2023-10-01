@@ -96,7 +96,7 @@ require_once('./lib/readCSV.php');
                     ?>
                     <div class="row align-items-center mb-5">
                     <div class="col-md-5 order-2 order-md-1 mt-md-0 mt-5">
-                        <h2 class="mb-4"><?=$awards[$i]['year']?></h2>
+                        <h2 class="mb-4"><?=$awards[$i]['year']?>:</h2>
                         <p class="text-muted mb-5"><?=$awards[$i]['award']?></p>
                         
                     </div>

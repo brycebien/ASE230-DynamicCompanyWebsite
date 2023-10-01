@@ -3,15 +3,26 @@ require_once('./awards.php');
 $index=$_GET['index'];
 $awards=get_awards();
 
-delete_award($awards[$index]);
-// maybe make delete auto direct back to index page if it sucessfully deletes?
+if (isset($_POST['index'])){
+    echo delete_award($awards[$index]);
+    return;
+}
 
 ?>
 
 <head>
-    <title>Deleting award entry <?= $index + 1 ?>...</title>
+    <title>Delete award entry <?= $index + 1 ?></title>
 </head>
 
 <body>
-    <h3>Deleting award entry <?= $index + 1 ?>...</h3>
+    <h1>Manage Awards Entries</h1>
+    <a href="index.php"><< Back</a>
+    <hr>
+
+    <h2 style="margin-bottom:0px">Are you sure you want to delete award entry <?= $index ?>?</h2><br>
+    <p>This cannot be undone</p>
+    <form method="POST">
+        <input type="hidden" name="index" value="<?= $index ?>">
+        <button>Delete entry</button>
+    </form>
 </body>
