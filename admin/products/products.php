@@ -19,12 +19,18 @@ function create_product($entry_in){
 }
 
 //edit a product
-function edit_product(){
+function edit_product($entry_in){
+    // 1. decode the json file
 
+    // 2. find json entry to edit
+
+    // 3. apply changes
+
+    // 4. encode the json file and put contents
 }
 
 //delete a product
 function delete_product(){
-    
+
 }
 ?>
