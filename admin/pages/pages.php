@@ -1,8 +1,8 @@
 <?php
-require_once('../../theme/functions.php');
-
 function get_pages(){
-
+    $pages=scandir('../../pages');
+    array_splice($pages,0,2);
+    return $pages; //returns array of pages
 }
 #creating a new page
 function create_page($page){
