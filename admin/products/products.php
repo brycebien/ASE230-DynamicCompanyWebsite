@@ -35,7 +35,10 @@ function edit_product($enteries_updated){
 }
 
 //delete a product
-function delete_product(){
-
+function delete_product($entry_in){
+    $index=$entry_in['index'];
+    $products=get_products();
+    array_splice($products,$index,$index+1);
+    file_put_contents('../../data/products.json',json_encode($products,JSON_PRETTY_PRINT));
 }
 ?>
