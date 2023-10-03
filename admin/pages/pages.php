@@ -25,4 +25,10 @@ function edit_page($newPage){
     $oldPage='../../pages/'.$newPage['name'];
     file_put_contents($oldPage, $newPage['code']);
 }
+
+function delete_page($page){
+    //NOT WORKING!!
+    $pageToDelete='../../pages/'.$page['name'];
+    unset($pageToDelete);
+}
 ?>
