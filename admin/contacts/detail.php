@@ -14,11 +14,6 @@ $contacts=get_contacts();
     <hr>
 
     <h2>Viewing contact request <?= $index ?></h2>
-    <table border="1" cellpadding="5" cellspacing="2">
-        <td><a href="edit.php?index=<?=$index?>">Edit</a></td>
-        <td><a href="delete.php?index=<?=$index?>">Delete</a></td>
-    </table>
-    <hr>
     <table border="1" cellpadding="5" cellspacing="2" style="width:1000px">
         <tr>
             <td><b>ID:</b></td>
