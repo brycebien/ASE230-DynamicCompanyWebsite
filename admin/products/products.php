@@ -1,6 +1,5 @@
 <?php
 require_once('../../lib/readJSON.php');
-$products_list=get_products(); // used for retrieving and indexing all items
 //retrieve and index
 function get_products(){
     return readJSON('../../data/products.json');
@@ -8,11 +7,13 @@ function get_products(){
 
 //create new product
 function create_product($entry_in){
-    //echo 'Creating entry '.$entry_in['id'].'...';
+    $index=$entry_in['index'];
     $entries_updated=get_products(); // set enteries_updated to the json data as php array
-    $entries_updated[count($entries_updated)]=$entry_in; // add the new entry to the json data
+    $new_entry=['name' => $entry_in['name'], 'description' => $entry_in['description'], 'applications' => [$entry_in['application0'],$entry_in['application1'],$entry_in['application2']]];
+    $entries_updated[count($entries_updated)]=$new_entry; // add the new entry to the json data
     $updated = json_encode($entries_updated,JSON_PRETTY_PRINT); // set updated to the json data as json
-    echo $updated;
+    echo '<pre>';
+    print_r($updated);
     file_put_contents('../../data/products.json',$updated); // update the json data
     header('Location: index.php');
 }
