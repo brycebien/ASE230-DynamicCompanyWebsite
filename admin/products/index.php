@@ -23,7 +23,7 @@ $products=get_products();
                     <td><b><?= $i ?>.</b></td>
                     <td><p class="text-muted mb-5"><b><?=$products[$i]['name']?></b>: <?=$products[$i]['description']?></p></td>
                     <td style="width:80px"><a href="detail.php?index=<?=$i?>">View details</a></td>
-                    <td><a href="edit.php?index<?=$i?>">Edit</a></td>
+                    <td><a href="edit.php?index=<?=$i?>">Edit</a></td>
                     <td><a href="delete.php?index=<?=$i?>">Delete</a></td>
                 </tr>
           <?php  }
