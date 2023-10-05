@@ -27,8 +27,7 @@ function edit_page($newPage){
 }
 
 function delete_page($page){
-    //NOT WORKING!!
-    $pageToDelete='../../pages/'.$page['name'];
-    unset($pageToDelete);
+    $pageToDelete=$page['name'];
+    unlink('../../pages/'.$pageToDelete);
 }
 ?>
