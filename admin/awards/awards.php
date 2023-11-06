@@ -70,14 +70,6 @@ class Award{
         return $this->title;
     }
 
-    public function setYear($year){
-        $this->year = $year;
-    }
-
-    public function setTitle($title){
-        $this->title = $title;
-    }
-
     public function display(){
         echo '<h2>' . $this->year . ':</h2><br><p class="text-muted mb-5">' . $this->title . '</p>';
     }
