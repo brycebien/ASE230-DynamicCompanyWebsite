@@ -103,6 +103,7 @@ require_once('./admin/awards/awards.php');
                     $awardsManager->addAward(new Award($year, $title));
                 }
                 $newAward = new Award('testyear', 'testtitle');
+                $awardsManager->addAward($newAward);
                 $awards = $awardsManager->getAwards();
 
                 foreach ($awards as $award) {

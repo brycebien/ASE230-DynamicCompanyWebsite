@@ -60,22 +60,6 @@ class Award{
     public function __construct($year, $title){
         $this->year = $year;
         $this->title = $title;
-        $this->addToCSV($this->year, $this->title);
-    }
-
-    private function addToCSV($year, $title){
-        $isInCSV=false;
-        $entries=readCSV('./data/awards.csv');
-        $new_entries=fopen('./data/awards.csv','a');
-        foreach($entries as $entry){
-            if($entry['award'] == $title){
-                $isInCSV=true;
-            }
-        }
-        if(!$isInCSV){
-            fwrite($new_entries,implode(';',['year'=>$year,'award'=>$title])."\n");
-        }
-        fclose($new_entries);
     }
 
     public function getYear(){
@@ -96,10 +80,26 @@ class AwardsManager{
 
     public function addAward($award){
         $this->awards[] = $award;
+
+        $isInCSV=false;
+        $entries=readCSV('./data/awards.csv');
+        $new_entries=fopen('./data/awards.csv','a');
+        foreach($entries as $entry){
+            if($entry['award'] == $award->getTitle()){
+                $isInCSV=true;
+            }
+        }
+        if(!$isInCSV){
+            fwrite($new_entries,implode(';',['year'=>$award->getYear(),'award'=>$award->getTitle()])."\n");
+        }
+        fclose($new_entries);
     }
 
     public function delete($index){
         if(array_key_exists($index, $this->awards)){
+            $entries=readCSV('./data/awards.csv');
+            $entries_updated=fopen('../../data/awards.csv','w');
+
             unset($this->awards[$index]);
         }
 
