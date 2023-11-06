@@ -2,6 +2,10 @@
 require_once('./theme/functions.php');
 require_once('./lib/readJSON.php');
 require_once('./lib/readCSV.php');
+
+require_once('./admin/awards/awards.php');
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,18 +95,17 @@ require_once('./lib/readCSV.php');
                 </div>
                 <!-- end row -->
                 <?php
-                $awards=readCSV('data/awards.csv');
-                for($i=0;$i<count($awards);$i++){
-                    ?>
-                    <div class="row align-items-center mb-5">
-                    <div class="col-md-5 order-2 order-md-1 mt-md-0 mt-5">
-                        <h2 class="mb-4"><?=$awards[$i]['year']?>:</h2>
-                        <p class="text-muted mb-5"><?=$awards[$i]['award']?></p>
-                        
-                    </div>
-                    <!-- end col -->
-                </div> 
-                <?php
+                $awardData=readCSV('data/awards.csv');
+                $awardsManager = new AwardsManager();
+                for($i=0; $i<count($awardData);$i++){
+                    $year = $awardData[$i]['year'];
+                    $title = $awardData[$i]['award'];
+                    $awardsManager->addAward(new Award($year, $title));
+                }
+                $awards = $awardsManager->getAwards();
+
+                foreach ($awards as $award) {
+                    $award->display();
                 }
                 ?>
                 <!-- end row -->
