@@ -1,7 +1,16 @@
 <?php
 require_once('./awards.php');
-$awardsManager = AwardsManager::getInstance();
-print_r($awardsManager->getAwards());
+require_once('../../lib/readCSV.php');
+$awardsManager = new AwardsManager();
+
+//import from csv:
+$awardData=readCSV('../data/awards.csv');
+//create objects for each award in awards.csv
+for($i=0; $i<count($awardData);$i++){
+    $year = $awardData[$i]['year'];
+    $title = $awardData[$i]['award'];
+    $awardsManager->addAward(new Award($year, $title));
+}
 ?>
 
 <head>

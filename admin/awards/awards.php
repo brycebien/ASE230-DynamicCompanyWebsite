@@ -66,8 +66,16 @@ class Award{
         return $this->year;
     }
 
+    public function setYear($year){
+        $this->year = $year;
+    }
+
     public function getTitle(){
         return $this->title;
+    }
+
+    public function setTitle($title){
+        $this->title = $title;
     }
 
     public function display(){
@@ -76,23 +84,43 @@ class Award{
 }
 
 class AwardsManager{
-    private static $instance;
-
     private $awards = [];
+
+    public function __construct(){
+        $awardData = readCSV('./data/awards.csv');
+        for($i=0; $i<count($awardData);$i++){
+            $year = $awardData[$i]['year'];
+            $title = $awardData[$i]['award'];
+            $this->addAward(new Award($year, $title));
+        }
+    }
 
     public function addAward($award){
         $this->awards[] = $award;
+
+        $isInCSV=false;
+        $entries=readCSV('./data/awards.csv');
+        $new_entries=fopen('./data/awards.csv','a');
+        foreach($entries as $entry){
+            if($entry['award'] == $award->getTitle()){
+                $isInCSV=true;
+            }
+        }
+        if(!$isInCSV){
+            fwrite($new_entries,implode(';',['year'=>$award->getYear(),'award'=>$award->getTitle(), 'id'=>count($entries)-1])."\n");
+        }
+        fclose($new_entries);
     }
 
     public function delete($index){
         if(array_key_exists($index, $this->awards)){
-            // $entries=readCSV('./data/awards.csv');
-            // $entries_updated=fopen('./data/awards.csv','w');
-            // fputcsv($entries_updated,['year','award','id'],';');
-            // foreach ($entries as $fields){
-            //     fwrite($entries_updated,$fields['id']==$entries[$index]['id']?"":implode(';',$fields)."\n");
-            // }
-            // fclose($entries_updated);
+            $entries=readCSV('./data/awards.csv');
+            $entries_updated=fopen('./data/awards.csv','w');
+            fputcsv($entries_updated,['year','award','id'],';');
+            foreach ($entries as $fields){
+                fwrite($entries_updated,$fields['id']==$entries[$index]['id']?"":implode(';',$fields)."\n");
+            }
+            fclose($entries_updated);
 
             unset($this->awards[$index]);
         }
@@ -110,4 +138,3 @@ class AwardsManager{
         $award->setTitle($title);
     }
 }
-$awardsManager
