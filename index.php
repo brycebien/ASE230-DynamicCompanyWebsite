@@ -104,6 +104,9 @@ require_once('./admin/awards/awards.php');
                 }
                 $newAward = new Award('testyear', 'testtitle');
                 $awardsManager->addAward($newAward);
+
+                $awardsManager->edit(4,'newYear','newTitle');
+
                 $awards = $awardsManager->getAwards();
 
                 foreach ($awards as $award) {

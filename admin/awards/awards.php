@@ -70,6 +70,14 @@ class Award{
         return $this->title;
     }
 
+    public function setYear($year){
+        $this->year = $year;
+    }
+
+    public function setTitle($title){
+        $this->title = $title;
+    }
+
     public function display(){
         echo '<h2>' . $this->year . ':</h2><br><p class="text-muted mb-5">' . $this->title . '</p>';
     }
@@ -115,4 +123,9 @@ class AwardsManager{
     }
 
     //add way to edit award
+    public function edit($index, $year, $title){
+        $award = $this->awards[$index];
+        $award->setYear($year);
+        $award->setTitle($title);
+    }
 }
