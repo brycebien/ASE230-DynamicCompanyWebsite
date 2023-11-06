@@ -90,7 +90,7 @@ class AwardsManager{
             }
         }
         if(!$isInCSV){
-            fwrite($new_entries,implode(';',['year'=>$award->getYear(),'award'=>$award->getTitle()])."\n");
+            fwrite($new_entries,implode(';',['year'=>$award->getYear(),'award'=>$award->getTitle(),'id'=>count($this->awards)-1])."\n");
         }
         fclose($new_entries);
     }
@@ -98,7 +98,12 @@ class AwardsManager{
     public function delete($index){
         if(array_key_exists($index, $this->awards)){
             $entries=readCSV('./data/awards.csv');
-            $entries_updated=fopen('../../data/awards.csv','w');
+            $entries_updated=fopen('./data/awards.csv','w');
+            fputcsv($entries_updated,['year','award','id'],';');
+            foreach ($entries as $fields){
+                fwrite($entries_updated,$fields['id']==$entries[$index]['id']?"":implode(';',$fields)."\n");
+            }
+            fclose($entries_updated);
 
             unset($this->awards[$index]);
         }
