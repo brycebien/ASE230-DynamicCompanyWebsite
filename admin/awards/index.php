@@ -1,6 +1,7 @@
 <?php
 require_once('./awards.php');
-$awards=get_awards();
+$awardsManager = AwardsManager::getInstance();
+print_r($awardsManager->getAwards());
 ?>
 
 <head>

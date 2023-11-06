@@ -2,7 +2,6 @@
 require_once('./theme/functions.php');
 require_once('./lib/readJSON.php');
 require_once('./lib/readCSV.php');
-
 require_once('./admin/awards/awards.php');
 
 
@@ -95,20 +94,23 @@ require_once('./admin/awards/awards.php');
                 </div>
                 <!-- end row -->
                 <?php
+                $awardsManager = AwardsManager::getInstance();
+                //import from existing csv file
                 $awardData=readCSV('data/awards.csv');
-                $awardsManager = new AwardsManager();
+                //create objects for each award in awards.csv
                 for($i=0; $i<count($awardData);$i++){
                     $year = $awardData[$i]['year'];
                     $title = $awardData[$i]['award'];
                     $awardsManager->addAward(new Award($year, $title));
                 }
+                //creating a new example award
                 $newAward = new Award('testyear', 'testtitle');
                 $awardsManager->addAward($newAward);
-
+                //editing the example award
                 $awardsManager->edit(4,'newYear','newTitle');
-
+                //setting awards = Awards[]
                 $awards = $awardsManager->getAwards();
-
+                //printing each award
                 foreach ($awards as $award) {
                     $award->display();
                 }

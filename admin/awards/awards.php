@@ -1,5 +1,5 @@
 <?php
-require_once('./lib/readCSV.php');
+//require_once('./lib/readCSV.php');
 // $awards_list=get_awards();
 
 // function get_awards(){
@@ -84,34 +84,23 @@ class Award{
 }
 
 class AwardsManager{
+    private static $instance;
+
     private $awards = [];
 
     public function addAward($award){
         $this->awards[] = $award;
-
-        $isInCSV=false;
-        $entries=readCSV('./data/awards.csv');
-        $new_entries=fopen('./data/awards.csv','a');
-        foreach($entries as $entry){
-            if($entry['award'] == $award->getTitle()){
-                $isInCSV=true;
-            }
-        }
-        if(!$isInCSV){
-            fwrite($new_entries,implode(';',['year'=>$award->getYear(),'award'=>$award->getTitle(),'id'=>count($this->awards)-1])."\n");
-        }
-        fclose($new_entries);
     }
 
     public function delete($index){
         if(array_key_exists($index, $this->awards)){
-            $entries=readCSV('./data/awards.csv');
-            $entries_updated=fopen('./data/awards.csv','w');
-            fputcsv($entries_updated,['year','award','id'],';');
-            foreach ($entries as $fields){
-                fwrite($entries_updated,$fields['id']==$entries[$index]['id']?"":implode(';',$fields)."\n");
-            }
-            fclose($entries_updated);
+            // $entries=readCSV('./data/awards.csv');
+            // $entries_updated=fopen('./data/awards.csv','w');
+            // fputcsv($entries_updated,['year','award','id'],';');
+            // foreach ($entries as $fields){
+            //     fwrite($entries_updated,$fields['id']==$entries[$index]['id']?"":implode(';',$fields)."\n");
+            // }
+            // fclose($entries_updated);
 
             unset($this->awards[$index]);
         }
@@ -129,3 +118,4 @@ class AwardsManager{
         $award->setTitle($title);
     }
 }
+$awardsManager
