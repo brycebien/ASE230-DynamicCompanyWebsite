@@ -1,5 +1,5 @@
 <?php
-require_once('C:\xampp\htdocs\ASE230\Assignment4\ASE230-DynamicCompanyWebsite\lib\readCSV.php');
+require_once('./lib/readCSV.php');
 // $awards_list=get_awards();
 
 // function get_awards(){
@@ -60,6 +60,22 @@ class Award{
     public function __construct($year, $title){
         $this->year = $year;
         $this->title = $title;
+        $this->addToCSV($this->year, $this->title);
+    }
+
+    private function addToCSV($year, $title){
+        $isInCSV=false;
+        $entries=readCSV('./data/awards.csv');
+        $new_entries=fopen('./data/awards.csv','a');
+        foreach($entries as $entry){
+            if($entry['award'] == $title){
+                $isInCSV=true;
+            }
+        }
+        if(!$isInCSV){
+            fwrite($new_entries,implode(';',['year'=>$year,'award'=>$title])."\n");
+        }
+        fclose($new_entries);
     }
 
     public function getYear(){
@@ -83,10 +99,10 @@ class AwardsManager{
     }
 
     public function delete($index){
-        //need to remove award from CSV
         if(array_key_exists($index, $this->awards)){
             unset($this->awards[$index]);
         }
+
     }
 
     public function getAwards(){
