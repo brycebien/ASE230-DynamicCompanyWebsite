@@ -1,8 +1,42 @@
 <?php
 require_once('../../lib/readJSON.php');
+
+class Product {
+    public $name;
+    public $description;
+    public $applications;
+    
+    function __construct($nameIn,$descIn,$appsIn){
+        $this->name = $nameIn;
+        $this->description = $descIn;
+        $this->applications = $appsIn;
+    }
+
+    function setName($nameIn){
+        $this->name = $nameIn;
+    }
+    function getName(){
+        return $this->name;
+    }
+    function setDescription($descIn){
+        $this->description = $descIn;
+    }
+    function getDescription(){
+        return $this->description;
+    }
+    function setApplications($appsIn){
+        $this->applications = $appsIn;
+    }
+    function getApplications(){
+        return $this->applications;
+    }
+}
+
+// OLD NON OBJECT WAY ------------------------------------------------------------------------------
 //retrieve and index
 function get_products(){
-    return readJSON('../../data/products.json');
+    $JSONHandler=new JSONHandler();
+    return $JSONHandler->read('../../data/products.json');
 }
 
 //create new product
