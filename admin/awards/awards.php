@@ -121,8 +121,8 @@ class AwardsManager{
 
     public function delete($index){
         if(array_key_exists($index, $this->awards)){
-            $entries=readCSV('./data/awards.csv');
-            $entries_updated=fopen('./data/awards.csv','w');
+            $entries=readCSV('../../data/awards.csv');
+            $entries_updated=fopen('../../data/awards.csv','w');
             fputcsv($entries_updated,['year','award','id'],';');
             foreach ($entries as $fields){
                 fwrite($entries_updated,$fields['id']==$entries[$index]['id']?"":implode(';',$fields)."\n");
