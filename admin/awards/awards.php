@@ -1,57 +1,5 @@
 <?php
-require_once('../../lib/readCSV.php');
-// $awards_list=get_awards();
-
-// function get_awards(){
-//     return readCSV('../../data/awards.csv');
-// }
-
-// function create_award($entry_in){
-//     echo 'Creating entry '.$entry_in['id'].'...';
-//     $entries_updated=fopen('../../data/awards.csv','a');
-
-//     fwrite($entries_updated,implode(';',$entry_in)."\n");
-    
-//     fclose($entries_updated);
-//     header('Location: index.php');
-//     die;
-// }
-
-// function edit_award($entry_in){
-//     echo 'Saving changes to entry '.$entry_in['id'].' ...';
-//     $entries_existing=get_awards();
-//     $entries_updated=fopen('../../data/awards.csv','w');
-
-//     for ($row=0;$row < count($entries_existing);$row++){
-//         var_dump($entries_existing[$row]);
-//         if ($entries_existing[$row]['id'] == $entry_in['index']){
-//             $entries_existing[$row]['year']=$entry_in['year'];
-//             $entries_existing[$row]['award']=$entry_in['award'];
-//         }
-//         echo '<br>';
-//     }
-//     fputcsv($entries_updated,['year','award','id'],';');
-//     foreach ($entries_existing as $fields){
-//         fwrite($entries_updated,implode(';',$fields)."\n");
-//     }
-//     fclose($entries_updated);
-//     header('Location: detail.php?index='.$entry_in['index']); //redirect back to entry
-//     die;
-// }
-
-// function delete_award($entry_in){
-//     echo 'Deleting entry '.$entry_in['id'].'...';
-//     $entries_existing=get_awards();
-//     $entries_updated=fopen('../../data/awards.csv','w');
-
-//     fputcsv($entries_updated,['year','award','id'],';');
-//     foreach ($entries_existing as $fields){
-//         fwrite($entries_updated,$fields['id']==$entry_in['id']?"":implode(';',$fields)."\n");
-//     }
-//     fclose($entries_updated);
-//     header('Location: index.php'); //redirect back to index
-//     die;
-// }
+require_once(file_exists('../../lib/readCSV.php')?'../../lib/readCSV.php' : './lib/readCSV.php');
 
 class Award{
     private $year;
@@ -93,7 +41,7 @@ class AwardsManager{
     private $awards = [];
 
     public function __construct(){
-        $awardData = readCSV('../../data/awards.csv');
+        $awardData = readCSV(file_exists('../../data/awards.csv')?'../../data/awards.csv' : './data/awards.csv');
         for($i=0; $i<count($awardData);$i++){
             $year = $awardData[$i]['year'];
             $title = $awardData[$i]['award'];
@@ -106,8 +54,8 @@ class AwardsManager{
         $this->awards[] = $award;
 
         $isInCSV=false;
-        $entries=readCSV('../../data/awards.csv');
-        $new_entries=fopen('../../data/awards.csv','a');
+        $entries=readCSV(file_exists('../../data/awards.csv')?'../../data/awards.csv' : './data/awards.csv');
+        $new_entries=fopen(file_exists('../../data/awards.csv')?'../../data/awards.csv' : './data/awards.csv','a');
         foreach($entries as $entry){
             if($entry['award'] == $award->getTitle()){
                 $isInCSV=true;
@@ -121,8 +69,8 @@ class AwardsManager{
 
     public function delete($index){
         if(array_key_exists($index, $this->awards)){
-            $entries=readCSV('../../data/awards.csv');
-            $entries_updated=fopen('../../data/awards.csv','w');
+            $entries=readCSV(file_exists('../../data/awards.csv')?'../../data/awards.csv' : './data/awards.csv');
+            $entries_updated=fopen(file_exists('../../data/awards.csv')?'../../data/awards.csv' : './data/awards.csv','w');
             fputcsv($entries_updated,['year','award','id'],';');
             foreach ($entries as $fields){
                 fwrite($entries_updated,$fields['id']==$entries[$index]['id']?"":implode(';',$fields)."\n");
@@ -144,8 +92,8 @@ class AwardsManager{
         $award->setYear($year);
         $award->setTitle($title);
 
-        $entries_existing=readCSV('../../data/awards.csv');
-        $entries_updated=fopen('../../data/awards.csv','w');
+        $entries_existing=readCSV(file_exists('../../data/awards.csv')?'../../data/awards.csv' : './data/awards.csv');
+        $entries_updated=fopen(file_exists('../../data/awards.csv')?'../../data/awards.csv' : './data/awards.csv','w');
         for($i=0;$i<count($entries_existing);$i++){
             if($entries_existing[$i]['id'] == $index){
                 $entries_existing[$i]['year'] = $year;
