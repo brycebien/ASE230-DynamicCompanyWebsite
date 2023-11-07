@@ -20,7 +20,7 @@ if (isset($_POST['index'])){
     <hr>
 
     <h2>Create new product</h2>
-    <p>New award ID: <b><?=$index?></b></p>
+    <p>New product ID: <b><?=$index?></b></p>
     <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
         <label for="name">Name:</label> <br>
         <input type="text" name="name"> <br>

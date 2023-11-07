@@ -1,6 +1,7 @@
 <?php
 require_once(file_exists('../../lib/readJSON.php')?'../../lib/readJSON.php':'./lib/readJSON.php');
 
+
 class Product {
     private $name;
     private $description;
@@ -33,10 +34,13 @@ class Product {
 
 class ProductManager {
     private $productList=[];
+    private $productFile;
     private $JSON;
 
     function __construct()
     {
+        // set product data diretory
+        $this->productFile=(file_exists('../../data/products.json')?'../../data/products.json':'./data/products.json');
         // force json handler to initalize
         $this->JSON=new JSONHandler;
         // automatically read out product list on creation
@@ -44,7 +48,7 @@ class ProductManager {
     }
 
     function readProductList(){
-        $productsRaw=$this->JSON->read('../../data/products.json');
+        $productsRaw=$this->JSON->read($this->productFile);
         $productListNew=[];
         foreach ($productsRaw as $product){
             $productListNew[]=new Product($product['name'],$product['description'],$product['applications']);
@@ -55,17 +59,17 @@ class ProductManager {
         return $this->productList;
     }
     function createProduct($entryIn){
-        $entries_updated=$this->JSON->read('../../data/products.json'); // set enteries_updated to the json data as php array
+        $entries_updated=$this->JSON->read($this->productFile); // set enteries_updated to the json data as php array
         $new_entry=['name' => $entryIn['name'], 'description' => $entryIn['description'], 'applications' => [$entryIn['application0'],$entryIn['application1'],$entryIn['application2']]];
         $entries_updated[count($entries_updated)]=$new_entry; // add the new entry to the json data
         $updated = json_encode($entries_updated,JSON_PRETTY_PRINT); // set updated to the json data as json
-        file_put_contents('../../data/products.json',$updated); // update the json data
+        file_put_contents($this->productFile,$updated); // update the json data
         header('Location: index.php');
     }
     function editProduct($entryUpdated){
         $index=$entryUpdated['index'];
         // 1. decode the json file
-        $enteries_old=$this->JSON->read('../../data/products.json');
+        $enteries_old=$this->JSON->read($this->productFile);
         // 2. apply changes
         $enteries_old[$index]['name']=$entryUpdated['name'];
         $enteries_old[$index]['description']=$entryUpdated['description'];
@@ -75,14 +79,14 @@ class ProductManager {
         }
         // 3. encode the json file and put contents
         $updated = json_encode($enteries_old,JSON_PRETTY_PRINT);
-        file_put_contents('../../data/products.json',$updated);
+        file_put_contents($this->productFile,$updated);
         header('Location: index.php');
     }
     function deleteProduct($entryUpdated){
         $index=$entryUpdated['index'];
-        $products=$this->JSON->read('../../data/products.json');
+        $products=$this->JSON->read($this->productFile);
         array_splice($products,$index,$index+1);
-        file_put_contents('../../data/products.json',json_encode($products,JSON_PRETTY_PRINT));
+        file_put_contents($this->productFile,json_encode($products,JSON_PRETTY_PRINT));
         header('Location: index.php');
     }
 }
