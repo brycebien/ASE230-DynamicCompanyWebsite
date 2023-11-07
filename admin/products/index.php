@@ -1,6 +1,10 @@
 <?php
 require_once('products.php');
-$products=get_products();
+$productManager=new ProductManager;
+$products=$productManager->getProductList();
+
+//echo '<pre>'; var_dump ($products); echo '</pre>'; 
+
 ?>
 <head>
     <title>Products</title>
@@ -21,7 +25,7 @@ $products=get_products();
             for($i=0;$i<count($products);$i++){ ?>
                 <tr>
                     <td><b><?= $i ?>.</b></td>
-                    <td><p class="text-muted mb-5"><b><?=$products[$i]['name']?></b>: <?=$products[$i]['description']?></p></td>
+                    <td><p class="text-muted mb-5"><b><?=$products[$i]->getName()?></b>: <?=$products[$i]->getDescription()?></p></td>
                     <td style="width:80px"><a href="detail.php?index=<?=$i?>">View details</a></td>
                     <td><a href="edit.php?index=<?=$i?>">Edit</a></td>
                     <td><a href="delete.php?index=<?=$i?>">Delete</a></td>

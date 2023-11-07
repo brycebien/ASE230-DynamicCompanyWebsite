@@ -1,7 +1,10 @@
 <?php
 require_once('./theme/functions.php');
-require_once('./lib/readJSON.php');
 require_once('./lib/readCSV.php');
+require_once('./admin/awards/awards.php');
+require_once('./admin/products/products.php');
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,19 +52,21 @@ require_once('./lib/readCSV.php');
                 <div class="row">
 
                     <?php
-                    foreach(readJSON('./data/products.json') as $product){?>
+                    $productManager=new ProductManager;
+                    $products=$productManager->getProductList();
+                    foreach($products as $product){?>
                         <div class="col-lg-4">
                         <div class="service-box text-center px-4 py-5 position-relative mb-4">
                             <div class="service-box-content p-4">
                                 <div class="icon-mono service-icon avatar-md mx-auto mb-4">
                                     <i class="" data-feather="box"></i>
                                 </div>
-                                <h4 class="mb-3 font-size-22"><?=$product['name']?></h4>
-                                <p class="text-muted mb-0"><?=$product['description']?></p>
+                                <h4 class="mb-3 font-size-22"><?=$product->getName()?></h4>
+                                <p class="text-muted mb-0"><?=$product->getDescription()?></p>
                                 <h4 class="mb-3 font-size-22">Applications:</h4>
-                                <?php for($i=0;$i<count($product['applications']);$i++){?>
+                                <?php for($i=0;$i<count($product->getApplications());$i++){?>
                                     <p class="text-muted mb-0"><?=
-                                        $product['applications'][$i];
+                                        $product->getApplications()[$i];
                                     ?>
                                 <?php
                                     }
@@ -91,18 +96,11 @@ require_once('./lib/readCSV.php');
                 </div>
                 <!-- end row -->
                 <?php
-                $awards=readCSV('data/awards.csv');
-                for($i=0;$i<count($awards);$i++){
-                    ?>
-                    <div class="row align-items-center mb-5">
-                    <div class="col-md-5 order-2 order-md-1 mt-md-0 mt-5">
-                        <h2 class="mb-4"><?=$awards[$i]['year']?>:</h2>
-                        <p class="text-muted mb-5"><?=$awards[$i]['award']?></p>
-                        
-                    </div>
-                    <!-- end col -->
-                </div> 
-                <?php
+                $awardsManager = new AwardsManager();
+                $awards = $awardsManager->getAwards();
+                //printing each award
+                foreach ($awards as $award) {
+                    $award->display();
                 }
                 ?>
                 <!-- end row -->
