@@ -1,7 +1,8 @@
 <?php
 require_once('./awards.php');
 $index=$_GET['index'];
-$awards=get_awards();
+$awardsManager = new AwardsManager();
+$awards=$awardsManager->getAwards();
 ?>
 
 <head>
@@ -26,9 +27,9 @@ $awards=get_awards();
             <td><b>Content:</b></td>
         </tr>
         <tr>
-            <td><?= $awards[$index]['id'] ?></td>
-            <td><?= $awards[$index]['year'] ?></td>
-            <td><?= $awards[$index]['award'] ?></td>
+            <td><?= $awards[$index]->getID(); ?></td>
+            <td><?= $awards[$index]->getYear() ?></td>
+            <td><?= $awards[$index]->getTitle() ?></td>
         </tr>
     </table>
 </body>

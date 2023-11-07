@@ -1,10 +1,11 @@
 <?php
 require_once('./awards.php');
-$awards=get_awards();
+$awardsManager = new AwardsManager();
+$awards=$awardsManager->getAwards();
 $index=count($awards);
 
 if (isset($_POST['index'])){
-    echo create_award($_POST);
+    $awardsManager->addAward(new Award($_POST['year'], $_POST['award'], $_POST['index']));
     return;
 }
 ?>

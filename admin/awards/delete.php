@@ -1,10 +1,10 @@
 <?php
 require_once('./awards.php');
 $index=$_GET['index'];
-$awards=get_awards();
+$awardsManager=new AwardsManager();
 
 if (isset($_POST['index'])){
-    echo delete_award($awards[$index]);
+    $awardsManager->delete($_POST['index']);
     return;
 }
 
