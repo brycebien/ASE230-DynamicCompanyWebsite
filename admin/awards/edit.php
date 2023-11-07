@@ -2,10 +2,12 @@
 require_once('./awards.php');
 // get index variable from either GET on first load or POST after submission (to avoid null errors)
 (count($_GET) >= 1)?$index=$_GET['index']:$index=$_POST['index'];
-$awards=get_awards();
+$awardsManager = new AwardsManager();
+$awards=$awardsManager->getAwards();
 
 if (isset($_POST['index'])){
-    echo edit_award($_POST);
+    $awardsManager->edit($index, $_POST['year'], $_POST['award']);
+    print_r($awardsManager->getAwards());
     return;
 }
 
@@ -24,9 +26,9 @@ if (isset($_POST['index'])){
 
     <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
         <label for="year">Year:</label> <br>
-        <input type="text" name="year" value="<?= $awards[$index]['year'] ?>"> <br>
+        <input type="text" name="year" value="<?= $awards[$index]->getYear() ?>"> <br>
         <label for="award">Description:</label> <br>
-        <textarea type="text" name="award" style="width:512px;height:128px"><?= $awards[$index]['award'] ?></textarea> <br><br>
+        <textarea type="text" name="award" style="width:512px;height:128px"><?= $awards[$index]->getTitle() ?></textarea> <br><br>
         <input type="hidden" name="index" value="<?= $index ?>">
         <button type="submit">Save changes</button>
     </form> <hr>
