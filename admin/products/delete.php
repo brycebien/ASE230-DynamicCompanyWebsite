@@ -1,12 +1,10 @@
 <?php
 require_once('./products.php');
 $index=$_GET['index'];
-$products=get_products();
+$productManager=new ProductManager;
 
 if (isset($_POST['index'])){
-    delete_product($_POST);
-    echo '<pre>';
-    print_r($_POST);
+    $productManager->deleteProduct($_POST);
     return;
 }
 

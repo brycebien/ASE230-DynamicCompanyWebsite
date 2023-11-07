@@ -1,12 +1,11 @@
 <?php
 require_once('./products.php');
-$products=get_products();
+$productManager=new ProductManager;
+$products=$productManager->getProductList();
 $index=count($products);
 
 if (isset($_POST['index'])){
-    create_product($_POST);
-    echo '<pre>';
-    print_r($_POST);
+    $productManager->createProduct($_POST);
     return;
 }
 ?>

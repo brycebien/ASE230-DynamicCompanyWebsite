@@ -2,6 +2,9 @@
 require_once('products.php');
 $productManager=new ProductManager;
 $products=$productManager->getProductList();
+
+//echo '<pre>'; var_dump ($products); echo '</pre>'; 
+
 ?>
 <head>
     <title>Products</title>

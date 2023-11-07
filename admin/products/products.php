@@ -1,5 +1,5 @@
 <?php
-require_once('../../lib/readJSON.php');
+require_once(file_exists('../../lib/readJSON.php')?'../../lib/readJSON.php':'./lib/readJSON.php');
 
 class Product {
     private $name;
@@ -32,7 +32,7 @@ class Product {
 }
 
 class ProductManager {
-    private $productList;
+    private $productList=[];
     private $JSON;
 
     function __construct()
@@ -47,7 +47,7 @@ class ProductManager {
         $productsRaw=$this->JSON->read('../../data/products.json');
         $productListNew=[];
         foreach ($productsRaw as $product){
-            $productListNew=[new Product($product['name'],$product['description'],$product['applications'])];
+            $productListNew[]=new Product($product['name'],$product['description'],$product['applications']);
         }
         $this->productList=$productListNew;
     }
@@ -76,12 +76,14 @@ class ProductManager {
         // 3. encode the json file and put contents
         $updated = json_encode($enteries_old,JSON_PRETTY_PRINT);
         file_put_contents('../../data/products.json',$updated);
+        header('Location: index.php');
     }
     function deleteProduct($entryUpdated){
         $index=$entryUpdated['index'];
         $products=$this->JSON->read('../../data/products.json');
         array_splice($products,$index,$index+1);
         file_put_contents('../../data/products.json',json_encode($products,JSON_PRETTY_PRINT));
+        header('Location: index.php');
     }
 }
 

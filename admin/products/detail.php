@@ -1,7 +1,8 @@
 <?php
 require_once('./products.php');
 $index=$_GET['index'];
-$products=get_products();
+$productManager=new ProductManager;
+$products=$productManager->getProductList();
 ?>
 
 <head>
@@ -27,8 +28,8 @@ $products=get_products();
         </tr>
         <tr>
             <td><?= $index ?></td>
-            <td><?= $products[$index]['name'] ?></td>
-            <td><?= $products[$index]['description'] ?></td>
+            <td><?= $products[$index]->getName() ?></td>
+            <td><?= $products[$index]->getDescription() ?></td>
         </tr>
     </table>
 </body>
